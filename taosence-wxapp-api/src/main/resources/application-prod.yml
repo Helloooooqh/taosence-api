@@ -1,0 +1,106 @@
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8080
+  port: 29999
+
+# Spring配置
+spring:
+  # redis 配置
+  redis:
+    # 地址
+    host: ${DATASOURCE_URL:ENC(c/Gg15ptY80e3tbEUyp9HxOcvtZaEDdv)}
+    # 端口，默认为6379
+    port: 9736
+    # 数据库索引
+    database: 1
+    # 密码
+    password: ${DATASOURCE_PWD:ENC(/GkdZqJFjqKqQvfziW6LhFqAcgBQ6Lt+zRN2p5Q/T4c=)}
+    # 连接超时时间
+    timeout: 10s
+    lettuce:
+      pool:
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池的最大数据库连接数
+        max-active: 8
+        # #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+  # 数据源配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      # 主库数据源
+      master:
+        url: ${DATASOURCE_URL:ENC(Ew6MgY5ilCCnu7raZEoa+iJciIW353/f9dxMM6ioiadcRy3zmFmIN9gaO1kWe44z24tpBBn8henl8HVYhgZd+BQfJuZVOP84yJ/DzP39WJ1NDeSzoZOEtNh3Z+o5mNdrkFV0DJBul2OZoc9QK33wFYVIj18lTLmhCk8XZfu3GVYNE00SPufbi+assJ4Igm/NG+VaPH7cBF8vG+lmnz8Y8rebep11Eyp+SDnqGxkvfIHx5f2PgbM/9XmsZKSHsEha8+Rynrd5qxZVosVhPqsqVA==)}
+        username: ${DATASOURCE_USERNAME:ENC(JPv9327hUdf/CVhXqLxpSg==)}
+        password: ${DATASOURCE_PWD:ENC(xRjVfNxh1lEEZNlIOAPwXZDpSzNtLJvyVLPGLvGmi5k=)}
+      # 从库数据源
+      slave:
+        # 从数据源开关/默认关闭
+        enabled: false
+        url:
+        username:
+        password:
+      # 初始连接数
+      initialSize: 5
+      # 最小连接池数量
+      minIdle: 10
+      # 最大连接池数量
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 6000
+      # 配置连接超时时间
+      connectTimeout: 30000
+      # 配置网络超时时间
+      socketTimeout: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 30000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 30000
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      maxEvictableIdleTimeMillis: 900000
+      # 配置检测连接是否有效
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      webStatFilter:
+        enabled: true
+      statViewServlet:
+        enabled: true
+        # 设置白名单，不填则允许所有访问
+        allow:
+        url-pattern: /druid/*
+        # 控制台管理用户名和密码
+        login-username: ruoyi
+        login-password: 123456
+      filter:
+        stat:
+          enabled: true
+          # 慢SQL记录
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
+#shiji-kunlun
+shi-ji-cloud:
+  kunlun:
+    domain: https://kunlun-ump-taosence.shijicloud.com/LPS_Web_API
+    auth-domain: https://kunlun-ump-taosence.shijicloud.com/Auth
+    client-id: 662f26763ca34abfbdd27af7fd8180f3
+    client-secret: eb339c0a2fcd482eaa2a05e948e65d58
+    grant-type: client_credentials
+    scope: LPS_Web_API
+  e-commerce:
+    domain: https://kunlun-ump-taosence.shijicloud.com/eCommerce_API
+    secret: 123456
+    app-id: XCX
+  kws:
+    domain: https://kunlun-ump-taosence.shijicloud.com/KWS
+    username: XCX
+    password: 8888
